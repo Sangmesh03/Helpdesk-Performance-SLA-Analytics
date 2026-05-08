@@ -280,23 +280,7 @@ python Python/generate_dataset.py
 
 ---
 
-## Why This Project
 
-Most fresher analytics portfolios use e-commerce or banking datasets from Kaggle. This project was deliberately designed to target Indian IT services companies (TCS, Infosys, Wipro, HCL, Cognizant) where internal helpdesk operations are a real daily concern. The schema design, SLA policy structure, and business questions mirror how ServiceNow and Jira Service Management operate in practice.
-
-The scatter chart on Page 3 and heatmap on Page 2 are intentionally differentiating choices — they show two-dimensional analysis that goes beyond standard bar and line charts seen in typical fresher projects.
-
----
-
-## About
-
-Built as part of an independent data analytics portfolio to demonstrate end-to-end DA skills — data design, SQL engineering, Power BI dashboard development, and business storytelling.
-
-**Tools:** SQL Server · Power BI · DAX · Python · Pandas · Faker
-
-**Domain:** IT Operations · Helpdesk Analytics · SLA Management
-
-**Connect:** [LinkedIn](https://www.linkedin.com/in/pratikshadandriyal) · [GitHub](https://github.com/pratikshadandriyal)
 
 
 
