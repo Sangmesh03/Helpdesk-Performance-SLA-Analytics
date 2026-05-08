@@ -1,0 +1,22 @@
+agent_id,agent_name,team,shift,location,join_date
+1,Rohit Sharma,L1,Night,Mumbai,2024-10-20
+2,Priya Nair,L1,Morning,Hyderabad,2022-12-05
+3,Amit Verma,L1,Morning,Bangalore,2024-05-04
+4,Sneha Iyer,L1,Morning,Mumbai,2024-06-08
+5,Karan Mehta,L1,Night,Pune,2023-05-28
+6,Divya Pillai,L1,Morning,Pune,2024-10-23
+7,Rajesh Kumar,L1,Evening,Mumbai,2023-02-20
+8,Ananya Singh,L1,Morning,Mumbai,2024-04-14
+9,Vikram Rao,L1,Morning,Bangalore,2024-11-10
+10,Pooja Gupta,L1,Night,Pune,2024-03-20
+11,Suresh Patil,L2,Morning,Pune,2024-10-31
+12,Neha Joshi,L2,Morning,Pune,2024-03-18
+13,Arjun Mishra,L2,Evening,Bangalore,2024-11-11
+14,Kavita Reddy,L2,Evening,Pune,2023-11-09
+15,Manoj Tiwari,L2,Evening,Mumbai,2023-10-01
+16,Ritu Saxena,L2,Morning,Chennai,2022-04-02
+17,Deepak Nair,L2,Evening,Hyderabad,2025-02-22
+18,Sunita Bhat,L3,Morning,Bangalore,2023-04-16
+19,Harish Menon,L3,Evening,Mumbai,2025-01-07
+20,Meera Kapoor,L3,Morning,Chennai,2023-10-21
+
