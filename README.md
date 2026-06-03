@@ -1,6 +1,6 @@
 # Helpdesk Performance & SLA Analytics
 
-**End-to-end IT support operations dashboard built with SQL Server, Power BI, and Python**
+**End-to-end IT support operations dashboard built with SQL Server, Power BI**
 
 ![Dashboard Preview](Screenshots/Executive%20Overview.png)
 
@@ -33,22 +33,6 @@ An end-to-end analytics dashboard that gives IT managers a single view of suppor
 - First-call resolution rate trends
 - Agent workload vs breach rate correlation
 
----
-
-## Tech Stack
-
-| Tool | Purpose |
-|------|---------|
-| Python (Faker, Pandas, NumPy) | Synthetic dataset generation with realistic patterns |
-| SQL Server | Data storage, cleaning, transformation, analytical views |
-| Power BI (DAX) | Interactive 3-page dashboard |
-
----
-
-## Dataset
-
-Synthetic dataset designed to mirror real IT helpdesk operations at a mid-large Indian IT company. All data generated using Python with realistic patterns deliberately embedded.
-
 **4 tables — 8,000+ records:**
 
 | Table | Rows | Description |
@@ -57,16 +41,6 @@ Synthetic dataset designed to mirror real IT helpdesk operations at a mid-large 
 | agents | 20 | Support agent details — L1/L2/L3 teams, shifts, locations |
 | departments | 8 | Requesting departments with headcount for normalisation |
 | sla_policy | 20 | SLA thresholds by category + priority combination |
-
-**Realistic patterns embedded in the data:**
-- Monday and Friday have higher ticket volumes — post-weekend issues and pre-weekend rushes
-- Network and Hardware categories breach SLA at higher rates (35-37%) vs Access (13%)
-- 3 agents carry disproportionate workload — 973, 973, 928 tickets vs team average of 400
-- Q1 2025 ticket spike simulating a system migration event
-- 23.49% overall SLA breach rate — realistic for a mid-size IT operation
-- 9.23% ticket reopen rate — indicating premature closure issues
-
----
 
 ## Project Structure
 
@@ -79,8 +53,6 @@ Helpdesk-Performance-SLA-Analytics/
 │   ├── departments.csv
 │   └── sla_policy.csv
 │
-├── Python/
-│   └── generate_dataset.py
 │
 ├── SQL/
 │   └── helpdesk_complete.sql
@@ -200,49 +172,6 @@ Staffing decisions — who needs support, who is overloaded.
 
 ---
 
-## DAX Measures
-
-Key measures built in Power BI (stored in single `Measures_` table):
-
-```dax
--- SLA Breach Rate (text for KPI card display)
-SLA Breach Rate % =
-FORMAT(
-    DIVIDE(
-        SUMX(vw_tickets_full, IF(vw_tickets_full[sla_breach_flag] = TRUE(), 1, 0)),
-        CALCULATE(COUNTROWS(vw_tickets_full),
-            NOT(ISBLANK(vw_tickets_full[sla_breach_flag]))),
-        0
-    ) * 100, "0.00") & "%"
-
--- FCR Rate
-FCR Rate % =
-FORMAT(
-    DIVIDE(
-        COUNTROWS(FILTER(vw_tickets_full,
-            vw_tickets_full[reopened_flag] = FALSE() &&
-            (vw_tickets_full[status] = "Resolved" ||
-             vw_tickets_full[status] = "Closed"))),
-        COUNTROWS(FILTER(vw_tickets_full,
-            vw_tickets_full[status] = "Resolved" ||
-            vw_tickets_full[status] = "Closed")),
-        0
-    ) * 100, "0.00") & "%"
-
--- Open Backlog
-Open Backlog =
-COUNTROWS(FILTER(vw_tickets_full,
-    vw_tickets_full[status] = "Open" ||
-    vw_tickets_full[status] = "In Progress"))
-
--- Breach Count
-Breach Count =
-SUMX(vw_tickets_full,
-    IF(vw_tickets_full[sla_breach_flag] = TRUE(), 1, 0))
-```
-
----
-
 ## SLA Policy Reference
 
 | Category | Priority | Response SLA | Resolution SLA |
@@ -255,28 +184,6 @@ SUMX(vw_tickets_full,
 | Access | Medium | 4 hrs | 24 hrs |
 | Any | Low | 8 hrs | 72 hrs |
 
----
-
-## How to Run
-
-**Dataset generation:**
-```bash
-pip install faker pandas numpy
-python Python/generate_dataset.py
-```
-
-**SQL setup:**
-1. Open SQL Server Management Studio
-2. Connect to your local instance
-3. Run `SQL/helpdesk_complete.sql` section by section — not all at once
-4. Import CSVs from `Data/` folder using SSMS Import Flat File wizard (Tasks → Import Flat File)
-5. Import in order: departments → agents → sla_policy → tickets
-6. Run the views section to create `vw_tickets_full`, `vw_agent_summary`, `vw_dept_summary`
-
-**Power BI:**
-1. Open `PowerBI/Helpdesk_Performance_SLA_Analytics.pbix`
-2. Home → Transform data → Data source settings → update to your local SQL Server instance
-3. Refresh data
 
 ---
 
